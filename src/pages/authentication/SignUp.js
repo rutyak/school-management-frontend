@@ -2,17 +2,27 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { toast } from "react-toastify";
+import InputPassword from "../../components/InputPassword";
 const Base_url = process.env.REACT_APP_BACKEND_URL;
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { inputStyle } = useOutletContext();
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();    
+    if(password !== confirmPassword){
+      toast.error("Password's not matching");
+      return;
+    }
+    
+    setLoading(true);
+
     try {
       const obj = {
         email,
@@ -20,11 +30,13 @@ const SignUp = () => {
       }
       const res = await axios.post(`${Base_url}/signup`,obj);
       if(res.status === 201) {
+        setLoading(false);
         toast.success("User registered successfully !");
         navigate("/"); 
       }
     } catch (error) {
-      toast.error("User already registered")
+      setLoading(false);
+      toast.error("User already registered");
     }
    
   }
@@ -64,25 +76,13 @@ const SignUp = () => {
           placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
-        <input
-          name="password"
-          className={`${inputStyle} mb-2`}
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input
-          name="cpassword"
-          className={`${inputStyle} mb-11`}
-          type="password"
-          placeholder="Confirm Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <InputPassword name="password" type="password" placeholder="Enter password" state={password} setPassword={setPassword}/>
+        <InputPassword name="confirmPassword" type="password" placeholder="New Confirm Password" state={confirmPassword} setPassword={setConfirmPassword}/>
+
         <button className="w-[40%] bg-purple-500 text-white p-3 rounded-xl text-md hover:bg-purple-600 transition-all duration-300 ease-in-out transform hover:scale-105">
-          Sign Up
+          { loading? "Please wait...": "Sign Up"}
         </button>
       </form>
 

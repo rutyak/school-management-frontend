@@ -37,7 +37,7 @@ const Info = ({ filteredItem }) => {
                     item.fees === "paid" ? "text-green-500" : "text-red-500"
                   } text-sm text-gray-800`}
                 >
-                  {item.salary ? item.salary : item.fees}
+                  {item.salary ? item.salary : strConverter(item.fees)}
                 </div>
               </div>
               <div>
@@ -77,7 +77,7 @@ const Info = ({ filteredItem }) => {
               <AttendanceLineGraph
                 type={item.classconducted? "teacher": "student"}
                 name={item.name}
-                attendancePercentage={item.classconducted}
+                percentage={item.classconducted? item.classconducted: item.attendance}
               />
             </div>
           </div>

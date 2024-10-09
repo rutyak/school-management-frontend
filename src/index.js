@@ -13,6 +13,7 @@ import SignUp from "./pages/authentication/SignUp";
 import Login from "./pages/authentication/Login";
 import { ChakraProvider } from "@chakra-ui/react";
 import Main from "./pages/Main";
+import ForgetPassword from "./pages/authentication/ForgetPassword";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
         path: "signup",
         element: <SignUp />,
       },
+      {
+        path: "forgetpassword",
+        element: <ForgetPassword/>
+      }
     ],
   },
   {

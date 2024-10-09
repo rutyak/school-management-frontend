@@ -26,6 +26,7 @@ const CustomeDrawer = ({ type }) => {
 
   function handleLogout() {
     navigate("/");
+    localStorage.removeItem("token");
     toast.success("Logout successfully");
   }
 

@@ -9,7 +9,7 @@ import CustomeDrawer from "./CustomeDrawer";
 import { useDisclosure } from "@chakra-ui/react";
 
 const Sidebar = ({ openMenu, setOpenMenu }) => {
-  const [active, setActive] = useState("Dashboard");
+  const [active, setActive] = useState("Class");
   const {onOpen} = useDisclosure();
  
   const styling =

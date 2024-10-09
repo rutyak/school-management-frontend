@@ -13,16 +13,16 @@ import {
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-const AttendanceLineGraph = ({ type, name, attendancePercentage }) => {
+const AttendanceLineGraph = ({ type, name, percentage }) => {
   const classAverage = type === "teacher" ? 40 : 65;
 
-  const labels = ['Attendance', 'Class Average'];
+  const labels = [type === "teacher"? 'Classes': 'Attendance', 'Class Average'];
   const data = {
     labels: labels,
     datasets: [
       {
         label: type === 'teacher' ? `${name}'s Conducted Classes` : `${name}'s Attendance Percentage (%)`,
-        data: [attendancePercentage, classAverage], 
+        data: [percentage, classAverage], 
         borderColor: 'rgba(255, 99, 132, 1)',
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         fill: true,
