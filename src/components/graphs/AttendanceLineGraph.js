@@ -86,7 +86,7 @@ const AttendanceLineGraph = ({ type, name, percentage }) => {
   };
 
   return (
-    <div className="w-full h-96">
+    <div className="w-full h-96 mobile:h-auto mobile:w-full lg:h-96 lg:w-full">
       <Line data={data} options={options} />
     </div>
   );

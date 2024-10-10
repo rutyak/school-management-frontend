@@ -48,8 +48,8 @@ const ManagementComponent = ({
     switch (type) {
       case "Analytics":
         return (
-          <div className="p-4 bg-gray-50 h-full flex flex-col items-center mt-3">
-            <h2 className="text-center text-xl font-semibold text-gray-700">
+          <div className="p-4 bg-gray-50 h-full flex flex-col items-center mt-3 mobile:h-auto  mobile:p-2 sm:p-3 md:p-4 lg:h-full">
+            <h2 className="text-center text-xl font-semibold text-gray-700 mobile:text-md lg:text-xl">
               Student Fees per Month: 15000/-
             </h2>
             <AnalyticsChart
@@ -68,15 +68,15 @@ const ManagementComponent = ({
         );
 
       default:
-        return <Info filteredItem={filteredItem} />;
+        return <Info filteredItem={filteredItem}/>;
     }
   };
 
   return (
-    <div className="w-full h-[calc(85%+4px)] flex gap-5 items-center justify-center">
+    <div className="w-full h-[calc(85%+4px)] flex gap-5 items-center justify-center mobile:flex-col mobile:w-full mobile:h-auto mobile:gap-5 lg:flex-row lg:w-full lg:h-[calc(85%+4px)]">
       <div
         className="student-list p-1 h-full border rounded-xl bg-white"
-        style={{ width: "calc(38% + 6px)" }}
+        // style={{ width: "calc(38% + 6px)" }}
       >
         <Management
           type={type}
@@ -93,7 +93,7 @@ const ManagementComponent = ({
           setTeacherData={setTeacherData}
         />
       </div>
-      <div className="student-info h-full w-[60%] border rounded-xl bg-white shadow-md p-2">
+      <div className="student-info h-full w-[60%] border rounded-xl bg-white shadow-md p-2 mobile:w-full mobile:h-auto md:w-[90%] md:h-full lg:h-full lg:w-[60%]">
         {renderContent()}
       </div>
     </div>

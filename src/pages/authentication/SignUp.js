@@ -46,13 +46,13 @@ const SignUp = () => {
   }
 
   return (
-    <div className="w-[100%] flex flex-col p-3 mb-4 animate-sideInLeft mt-10">
+    <div className="w-[100%] flex flex-col p-3 mb-4 animate-sideInLeft mt-10 md:mt-5">
       <h1 className="text-4xl font-bold text-gray-800 mb-2">Sign Up</h1>
       <h3 className="text-md text-gray-600 mb-6">
         Create your account to keep up with school news!
       </h3>
 
-      <div className="flex justify-center gap-4 mb-6">
+      <div className="flex justify-center gap-4 mb-6 md:mb-2 lg:mb-0">
         <button
           onClick={handleGoogleSignUp}
           className="flex items-center justify-center w-[100%] bg-white border border-gray-300 rounded-lg p-3 text-black font-medium hover:bg-gray-100 transition-all duration-300"
@@ -66,7 +66,7 @@ const SignUp = () => {
         </button>
       </div>
 
-      <div className="text-center mb-2 mt-2 text-gray-600">Or</div>
+      <div className="text-center mb-2 mt-2 text-gray-600 md:mb-1 md:mt-1 lg:mb-2 lg:mt-2">Or</div>
 
       <form onSubmit={handleSubmit}>
         <input

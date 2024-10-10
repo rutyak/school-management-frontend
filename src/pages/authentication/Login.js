@@ -48,7 +48,7 @@ const Login = () => {
   }
 
   return (
-    <div className="w-[100%] flex flex-col p-3 mb-4 animate-sideInLeft mt-20">
+    <div className="w-[100%] flex flex-col p-3 mb-4 animate-sideInLeft mt-20 md:mt-10 lg:mt-15">
       <h1 className="text-4xl font-bold text-gray-800 mb-2">Welcome Back!</h1>
       <h3 className="text-md text-gray-600 mb-6">
         Hey, Welcome back to your special place
@@ -70,7 +70,7 @@ const Login = () => {
           </div>
           <div className="hover:underline cursor-pointer" onClick={()=>navigate("/forgetpassword")}>Forgot Password?</div>
         </div>
-        <button className="w-[40%] bg-purple-500 text-white p-3 rounded-xl text-md hover:bg-purple-600 transition-all duration-300 ease-in-out transform hover:scale-105 mb-20">
+        <button className="w-[40%] bg-purple-500 text-white p-3 rounded-xl text-md hover:bg-purple-600 transition-all duration-300 ease-in-out transform hover:scale-105 mb-20 lg:mb-10">
           {loading? "Please wait...":"Login"}
         </button>
       </form>

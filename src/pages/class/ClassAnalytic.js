@@ -65,11 +65,11 @@ const ClassAnalytic = ({ className, teacherName }) => {
       <div className="flex items-center gap-5 bg-gradient-to-r from-blue-500 to-indigo-600 p-6 rounded-t-xl text-white shadow-lg">
         <div className="flex flex-col">
           <div className="text-3xl font-extrabold">{className.charAt(0).toUpperCase() + className.slice(1)}</div>
-          <div className="text-lg font-light">Teacher: {teacherName}</div>
+          <div className="text-lg font-light">Teacher: {teacherName.charAt(0).toUpperCase() + teacherName.slice(1)}</div>
         </div>
       </div>
 
-      <div className="w-full max-w-5xl mx-auto bg-white rounded-lg shadow-lg p-8 mt-4">
+      <div className="w-full max-w-5xl mx-auto bg-white rounded-lg shadow-lg p-8 mt-4 mobile:p-2 sm:p-4 md:p-6 lg:p-8">
         <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
           Student List
         </h1>
@@ -86,7 +86,7 @@ const ClassAnalytic = ({ className, teacherName }) => {
                 data={filteredData}
                 headers={headers}
                 handleDelete={handleDelete}
-                className="table-auto w-full text-left border-collapse"
+                className="table-auto w-full text-left border-collapse pointer-events-none"
               />
             </div>
 

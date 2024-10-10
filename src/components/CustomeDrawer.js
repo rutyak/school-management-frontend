@@ -43,11 +43,15 @@ const CustomeDrawer = ({ type }) => {
             onClick={onOpen}
             cursor="pointer"
             src="https://bit.ly/dan-abramov"
-            className="transition-tranform duration-300 ease-in-out"
+            className="transition-tranform duration-300 ease-in-out mobile:text-sm"
           />
         ) : (
-          <div onClick={onOpen} ref={btnRef} className="flex gap-0.5 items-center">
-            <IoSettingsOutline className="w-6 h-6 sm:w-7 sm:h-7 md:w-6 md:h-6 mr-2" />
+          <div
+            onClick={onOpen}
+            ref={btnRef}
+            className="flex gap-0.5 items-center"
+          >
+            <IoSettingsOutline className="w-6 h-6 mobile:ml-0 mobile:w-auto sm:w-7 sm:h-7 md:w-6 md:h-6 mr-2 " />
             <span className="text-lg hidden xl:block">Settings</span>
           </div>
         )}
@@ -60,7 +64,10 @@ const CustomeDrawer = ({ type }) => {
         motionPreset="slideInRight"
       >
         <DrawerOverlay />
-        <DrawerContent className="relative !w-[23%] bg-white shadow-lg rounded-lg transition-all duration-300 ease-in-out transform translate-x-0">
+        <DrawerContent
+          w={{ base:"30%", md: "30%", lg: "23%" }}
+          className="relative !w-[300px] bg-white shadow-lg rounded-lg transition-all duration-300 ease-in-out transform translate-x-0"
+        >
           <DrawerCloseButton className="absolute top-2 right-6 text-gray-500  py-2 hover:text-gray-700 transition duration-300" />
 
           <DrawerHeader className="mt-10 text-black">

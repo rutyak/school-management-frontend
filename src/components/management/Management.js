@@ -165,9 +165,9 @@ const Management = ({
   });
 
   return (
-    <div className="w-full p-4 space-y-6">
+    <div className="w-full p-4 space-y-6 mobile:w-full mobile:p-2 sm:p-4 md:p-4 lg:p-4 lg:w-full">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-800">
+        <h1 className="text-xl font-semibold text-gray-600">
           {type === "Analytics" ? type : `${type} List`}
         </h1>
         {type === "Analytics" ? (

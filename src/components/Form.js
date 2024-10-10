@@ -79,10 +79,10 @@ const Form = ({
   };
 
   const inputStyle =
-    "w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200";
+    "w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 mobile:p-1 lg:p-2";
   const labelStyle = "block text-gray-700 text-sm font-medium mb-2";
   const formContainerStyle =
-    "relative w-[100%] max-w-lg p-8 bg-white rounded-lg shadow-lg mobile:w-[90%] lg:w-[600px]";
+    "relative w-[100%] max-w-lg p-8 bg-white rounded-lg shadow-lg mobile:p-4 mobile:w-[90%] lg:w-[600px] lg:p-8";
 
   const formFields = {
     Student: [
@@ -198,7 +198,7 @@ const Form = ({
               onSubmit={handleSubmitWithValidation}
               className="max-h-[530px] overflow-y-auto scrollbar"
             >
-              <h2 className="text-2xl font-bold mb-5 text-center text-gray-800">
+              <h2 className="text-2xl font-bold mb-5 text-center text-gray-800 mobile:text-xl lg:text-2xl">
                 {type} Registration Form
               </h2>
 
