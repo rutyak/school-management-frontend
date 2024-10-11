@@ -1,8 +1,12 @@
-import { useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Management from "./Management";
 import Info from "./Info";
 import AnalyticsChart from "../../pages/analytics/AnalyticsChart";
 import ClassAnalytic from "../../pages/class/ClassAnalytic";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useOutletContext } from "react-router-dom";
+const Base_url = process.env.REACT_APP_BACKEND_URL;
 
 const ManagementComponent = ({
   type,
@@ -19,6 +23,14 @@ const ManagementComponent = ({
   teacherData,
 }) => {
   const [data, setData] = useState([]);
+  const [columns, setColumns] = useState([]);
+  const [itemId, setItemId] = useState(null);
+  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [formData, setFormData] = useState(formTemplate);
+  const [loading, setLoading] = useState(false);
+  const { setHideInput } = useOutletContext();
+  setHideInput(type === "Analytics");
   const [filteredItem, setFilteredItem] = useState([
     {
       address: "-",
@@ -36,6 +48,155 @@ const ManagementComponent = ({
   const [newClassName, setNewClassName] = useState({
     className: "mathematics",
     teacher: "Sakshi mam",
+  });
+
+  const apiEndpoints = {
+    fetch: `${Base_url}/fetch/${
+      type === "Analytics" ? "teacher" : type.toLowerCase()
+    }`,
+    create: `${Base_url}/create/${type.toLowerCase()}`,
+    update: `${Base_url}/update/${type.toLowerCase()}`,
+    delete: `${Base_url}/delete/${type.toLowerCase()}`,
+  };
+
+  const getData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get(apiEndpoints.fetch);
+      if (res.data.length > 0) {
+        const columnKeys = Object.keys(res.data[0]);
+
+        const updatedData =
+          type === "Analytics"
+            ? res.data.map((item) => ({
+                ...item,
+                salary:
+                  salaryView === "Monthly" ? item.salary : item.salary * 12,
+              }))
+            : res.data;
+
+        const modifiedColumnKeys =
+          type === "Analytics"
+            ? columnKeys.filter(
+                (key) =>
+                  key !== "dob" &&
+                  key !== "contact" &&
+                  key !== "_id" &&
+                  key !== "__v"
+              )
+            : columnKeys.slice(1, -1);
+
+        setData(updatedData);
+        console.log("updated data :", updatedData);
+        if (type === "Analytics") setTeacherData(updatedData);
+        setColumns(modifiedColumnKeys);
+      } else {
+        setData([]);
+        setColumns([]);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      toast.error("Failed to fetch data!");
+    } finally {
+      setLoading(false);
+    }
+  }, [apiEndpoints.fetch, salaryView, type, setData, setTeacherData]);
+
+  useEffect(() => {
+    getData();
+  }, [getData]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const studentsInSubject = data.filter(
+        (student) => student.className === formData.className
+      );
+      if (studentsInSubject.length >= 10) {
+        toast.error(
+          `Cannot add more students to ${formData.className}. Limit reached!`
+        );
+        return;
+      }
+
+      setIsFormVisible(false);
+
+      console.log("after submit....", formData);
+      await axios.post(apiEndpoints.create, formData);
+      toast.success(`${type} added successfully!`);
+      await getData();
+    } catch (error) {
+      console.error(
+        `Error creating ${type.toLowerCase()}:`,
+        error.request.response
+      );
+      toast.error(`Cannot add ${type.toLowerCase()}!`);
+    }
+    resetForm();
+  };
+
+  const handleEditSubmit = async (e, id) => {
+    e.preventDefault();
+    try {
+      const studentsInSubject = data.filter(
+        (student) => student.className === formData.className
+      );
+      if (studentsInSubject.length >= 10) {
+        toast.error(
+          `Cannot add more students to ${formData.className}. Limit reached!`
+        );
+        return;
+      }
+      setIsFormVisible(false);
+      await axios.put(`${apiEndpoints.update}/${id}`, formData);
+      toast.success(`${type} edited successfully!`);
+      await getData();
+    } catch (error) {
+      console.error(`Error editing ${type.toLowerCase()}:`, error.message);
+      toast.error(`Cannot edit ${type.toLowerCase()}!`);
+    }
+    resetForm();
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`${apiEndpoints.delete}/${id}`);
+      toast.success(`${type} deleted successfully!`);
+      await getData();
+    } catch (error) {
+      console.error(`Error deleting ${type.toLowerCase()}:`, error.message);
+      toast.error(`Cannot delete ${type.toLowerCase()}!`);
+    }
+  };
+
+  const resetForm = () => {
+    setFormData(formTemplate);
+    setItemId(null);
+    setEditMode(false);
+    setIsFormVisible(false);
+  };
+
+  const headers = columns.map((col) => ({
+    key: col,
+    label: keyMapping[col] || col.charAt(0).toUpperCase() + col.slice(1),
+  }));
+
+  const handleToggleView = async (view) => {
+    setSalaryView(view);
+    toggleView(view);
+    await getData();
+  };
+
+  const filteredData = data?.filter((item) => {
+    const searchItem = search?.toLowerCase().trim();
+    return columns.some((key) => {
+      const value = item[key];
+      if (typeof value === "string") {
+        return value.toLowerCase().trim().includes(searchItem);
+      }
+      return false;
+    });
   });
 
   function handleItemClick(id, className, teacherName) {
@@ -64,35 +225,46 @@ const ManagementComponent = ({
           <ClassAnalytic
             className={newClassName?.className}
             teacherName={newClassName?.teacher}
+            handleEditSubmit={handleEditSubmit}
+            handleDelete={handleDelete}
           />
         );
 
       default:
-        return <Info filteredItem={filteredItem}/>;
+        return (
+          <Info
+            filteredItem={filteredItem}
+            handleEditSubmit={handleEditSubmit}
+            handleDelete={handleDelete}
+          />
+        );
     }
   };
 
   return (
-    <div className="w-full h-[calc(85%+4px)] flex gap-5 items-center justify-center mobile:flex-col mobile:w-full mobile:h-auto mobile:gap-5 lg:flex-row lg:gap-3 lg:w-full lg:h-[calc(85%+10px)] xl:h-[calc(85%+4px)]">
-      <div
-        className="student-list w-[calc(38% + 6px)] p-1 h-full border rounded-xl bg-white lg:w-[45%] xl:w-[calc(38%+6px)]"
-      >
+    <div className="w-full h-[calc(85%+4px)] flex gap-5 items-center justify-center mobile:flex-col mobile:w-full mobile:h-auto mobile:gap-5 lg:flex-row lg:gap-3 lg:w-full lg:h-[calc(85%+10px)] xl:gap-5 xl:h-[calc(85%+4px)]">
+      <div className="student-list w-[calc(38% + 6px)] p-1 h-full border rounded-xl bg-white mobile:w-full lg:w-[45%] xl:w-[calc(45%+16px)]">
         <Management
           type={type}
-          formTemplate={formTemplate}
-          keyMapping={keyMapping}
-          search={search}
-          setSearch={setSearch}
-          setData={setData}
-          data={data}
-          handleItemClick={handleItemClick}
           salaryView={salaryView}
-          setSalaryView={setSalaryView}
-          toggleView={toggleView}
-          setTeacherData={setTeacherData}
+          loading={loading}
+          handleToggleView={handleToggleView}
+          setFormData={setFormData}
+          formData={formData}
+          isFormVisible={isFormVisible}
+          setIsFormVisible={setIsFormVisible}
+          editMode={editMode}
+          setEditMode={setEditMode}
+          resetForm={resetForm}
+          handleItemClick={handleItemClick}
+          data={filteredData.length > 0 ? filteredData : data}
+          headers={headers}
+          handleDelete={handleDelete}
+          setItemId={setItemId}
+          handleSubmit={editMode ? handleEditSubmit : handleSubmit}
         />
       </div>
-      <div className="student-info h-full w-[60%] border rounded-xl bg-white shadow-md p-2 mobile:w-full mobile:h-auto md:w-[90%] md:h-full lg:h-full lg:w-[calc(52%-3px)] xl:w-[60%]">
+      <div className="student-info h-full w-[60%] border rounded-xl bg-white shadow-md p-2 mobile:w-full mobile:h-auto md:w-[90%] md:h-full lg:h-full lg:w-[calc(52%-3px)] xl:w-[52%]">
         {renderContent()}
       </div>
     </div>

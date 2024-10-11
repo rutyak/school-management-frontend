@@ -20,7 +20,7 @@ const Table = ({
     "py-3 px-6 text-md text-gray-800 whitespace-nowrap mobile:py-3 mobile:px-1 mobile:text-[13px] mobile:leading-[15px] md:text-sm lg:text-md lg:text-sm lg:px-4 lg:py-4 xl:text-md";
 
   const tableHeaderClass =
-    "py-3 px-6 text-left text-md font-medium text-gray-700 whitespace-nowrap mobile:py-3 mobile:px-1 mobile:text-[13px] mobile:leading-[15px] sm:py-2 sm:px-4 sm:text-sm lg:text-sm lg:px-3 lg:py-2.5 xl:text-md xl:py-3 xl:px-6";
+    "py-3 px-6 text-left text-md font-medium text-gray-700 whitespace-nowrap mobile:py-3 mobile:px-1 mobile:text-[13px] mobile:leading-[15px] sm:py-2 sm:px-4 sm:text-sm lg:text-sm lg:px-3 lg:py-2.5 xl:text-md xl:py-3 xl:px-4 xl:py-3";
 
   // const buttonBaseClass =
   //   "flex items-center px-4 py-2 text-sm font-semibold text-white rounded-md transition-transform transform hover:scale-105 mobile:px-2 mobile:py-1 sm:text-xs sm:px-3 sm:py-1.5 lg:text-sm lg:px-4 lg:py-2 xl:text-md";
@@ -37,7 +37,7 @@ const Table = ({
   }
 
   return (
-    <div className="max-w-full max-h-[430px] flex justify-center overflow-x-auto scrollbar">
+    <div className="max-w-full max-h-[430px] flex justify-center overflow-x-auto scrollbar xl:max-h-[390px]">
       <div className="w-full">
         <table className="w-full bg-white border-seperate border-spacing-y-5">
           <thead>

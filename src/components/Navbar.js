@@ -12,7 +12,7 @@ const Navbar = ({
 }) => {
   return (
     <>
-      <nav className="w-full mb-[20px] border rounded-xl bg-white px-8 shadow-lg z-20 mobile:px-3 mobile:flex mobile:gap-4 mobile:items-center mobile:rounded-none mobile:py-2 mobile:h-17 md:h-19 lg:mb-[11px] xl:px-8 xl:rounded-xl lg:h-20">
+      <nav className="w-full mb-[20px] border rounded-xl bg-white px-8 shadow-lg z-20 mobile:px-3 mobile:flex mobile:gap-4 mobile:items-center mobile:rounded-none mobile:py-2 mobile:h-17 md:h-19 lg:mb-[11px] lg:h-20 xl:mb-[20px] xl:px-8 xl:rounded-xl">
         <GiHamburgerMenu
           className="text-2xl block mobile:text-2xl xl:hidden"
           onClick={handleToggleMenu}
