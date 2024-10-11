@@ -73,10 +73,9 @@ const ManagementComponent = ({
   };
 
   return (
-    <div className="w-full h-[calc(85%+4px)] flex gap-5 items-center justify-center mobile:flex-col mobile:w-full mobile:h-auto mobile:gap-5 lg:flex-row lg:w-full lg:h-[calc(85%+4px)]">
+    <div className="w-full h-[calc(85%+4px)] flex gap-5 items-center justify-center mobile:flex-col mobile:w-full mobile:h-auto mobile:gap-5 lg:flex-row lg:gap-3 lg:w-full lg:h-[calc(85%+10px)] xl:h-[calc(85%+4px)]">
       <div
-        className="student-list p-1 h-full border rounded-xl bg-white"
-        // style={{ width: "calc(38% + 6px)" }}
+        className="student-list w-[calc(38% + 6px)] p-1 h-full border rounded-xl bg-white lg:w-[45%] xl:w-[calc(38%+6px)]"
       >
         <Management
           type={type}
@@ -93,7 +92,7 @@ const ManagementComponent = ({
           setTeacherData={setTeacherData}
         />
       </div>
-      <div className="student-info h-full w-[60%] border rounded-xl bg-white shadow-md p-2 mobile:w-full mobile:h-auto md:w-[90%] md:h-full lg:h-full lg:w-[60%]">
+      <div className="student-info h-full w-[60%] border rounded-xl bg-white shadow-md p-2 mobile:w-full mobile:h-auto md:w-[90%] md:h-full lg:h-full lg:w-[calc(52%-3px)] xl:w-[60%]">
         {renderContent()}
       </div>
     </div>
