@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaRegEdit } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import "../index.css";
 
@@ -13,6 +13,8 @@ const Form = ({
   editStyle,
   editMode,
   resetForm,
+  setIsEditVisible, 
+  isEditVisible
 }) => {
   const [errorMessages, setErrorMessages] = useState({});
 
@@ -33,7 +35,7 @@ const Form = ({
     father: "Father's name",
     attendance: "Attendance",
     address: "Address",
-    classconducted: "Class Conducted"
+    classconducted: "Class Conducted",
   };
 
   const handleFormData = (e) => {
@@ -88,7 +90,7 @@ const Form = ({
     Student: [
       { name: "name", type: "text", placeholder: "Enter your name" },
       // { name: "photo", type: "file" },
-      { name: "id", type: "text", placeholder: "eg. ts-234"},
+      { name: "id", type: "text", placeholder: "eg. ts-234" },
       { name: "gender", type: "select", options: ["Male", "Female", "Other"] },
       { name: "dob", type: "date" },
       { name: "contact", type: "tel", placeholder: "Enter your number" },
@@ -106,8 +108,12 @@ const Form = ({
         ],
       },
       { name: "father", type: "text", placeholder: "Enter your father's name" },
-      { name: "attendance", type: "number", placeholder: "Enter attendance in %"},
-      { name: "address", type: "text", placeholder: "Enter your address"},
+      {
+        name: "attendance",
+        type: "number",
+        placeholder: "Enter attendance in %",
+      },
+      { name: "address", type: "text", placeholder: "Enter your address" },
     ],
     Teacher: [
       { name: "name", type: "text", placeholder: "Enter your name" },
@@ -130,8 +136,12 @@ const Form = ({
         ],
       },
       { name: "father", type: "text", placeholder: "Enter your father's name" },
-      { name: "classconducted", type: "number", placeholder: "Enter total class conducted"},
-      { name: "address", type: "text", placeholder: "Enter your address"},
+      {
+        name: "classconducted",
+        type: "number",
+        placeholder: "Enter total class conducted",
+      },
+      { name: "address", type: "text", placeholder: "Enter your address" },
     ],
     Class: [
       {
@@ -175,12 +185,16 @@ const Form = ({
     <div>
       {!isFormVisible && (
         <button
-          onClick={() => setIsFormVisible(true)}
-          className={`${
-            editMode ? editStyle : "text-blue-500"
-          } border border-gray-300 rounded-lg bg-gray-50 hover:bg-gray-100 font-semibold py-2 px-4 transition-colors duration-300`}
+          onClick={() => editMode? setIsEditVisible(true): setIsFormVisible(true)}
+          className={
+            "text-blue-500 border border-gray-300 rounded-lg bg-gray-50 hover:bg-gray-100 font-semibold py-2 px-4 transition-colors duration-300"
+          }
         >
-          {editMode ? <FaEdit className="mr-1" /> : `Add ${type}`}
+          {editMode ? (
+            <FaRegEdit className="text-4xl text-blue-400 p-2 transition-all duration-300 ease-in-out" onClick={()=>setIsEditVisible(true)}/>
+          ) : (
+            `Add ${type}`
+          )}
         </button>
       )}
 
@@ -221,18 +235,18 @@ const Form = ({
                         </option>
                       ))}
                     </select>
-                  // ) : field.type === "file" ? (
-                  //   <input
-                  //     name={field.name}
-                  //     className={`${inputStyle} bg-blue-200`}
-                  //     type="file"
-                  //     accept="image/*"
-                  //     onChange={handleFormData}
-
-                  //     placeholder="Add image"
-                  //     required
-                  //   />
                   ) : (
+                    // ) : field.type === "file" ? (
+                    //   <input
+                    //     name={field.name}
+                    //     className={`${inputStyle} bg-blue-200`}
+                    //     type="file"
+                    //     accept="image/*"
+                    //     onChange={handleFormData}
+
+                    //     placeholder="Add image"
+                    //     required
+                    //   />
                     <input
                       name={field.name}
                       className={inputStyle}

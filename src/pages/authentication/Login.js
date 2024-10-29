@@ -48,7 +48,7 @@ const Login = () => {
   }
 
   return (
-    <div className="w-[100%] flex flex-col p-3 mb-4 animate-sideInLeft mt-20 md:mt-10 lg:mt-15">
+    <div className="w-[100%] flex flex-col p-3 mb-4 animate-sideInLeft mt-20 md:mt-10 lg:mt-15 xl:mt-20">
       <h1 className="text-4xl font-bold text-gray-800 mb-2">Welcome Back!</h1>
       <h3 className="text-md text-gray-600 mb-6">
         Hey, Welcome back to your special place

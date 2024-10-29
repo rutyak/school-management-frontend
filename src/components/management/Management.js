@@ -52,7 +52,7 @@ const Management = ({
             className="bg-gray-200 text-blue-400 px-4 py-2 rounded-md shadow hover:bg-gray-300 transition-transform transform hover:scale-105"
             onClick={() => setIsFormVisible(!isFormVisible)}
           >
-            {isFormVisible ? "Hide Form" : `Add ${type}`}
+             `Add ${type}`
           </button>
         )}
       </div>

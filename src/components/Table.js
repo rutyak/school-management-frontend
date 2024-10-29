@@ -76,6 +76,8 @@ const Table = ({
           <tbody>
             {data && data.length > 0 ? (
               data.map((item) => (
+                <>
+                {type==="Class" && console.log("classData...",item)}
                 <tr
                   key={item._id}
                   className={`border-b border-gray-200 cursor-pointer`}
@@ -124,6 +126,7 @@ const Table = ({
                     </>
                   )}
                 </tr>
+                </>
               ))
             ) : (
               <tr>
@@ -146,7 +149,6 @@ const Table = ({
           formData={formData}
           handleSubmit={handleEditSubmit}
           isFormVisible={isFormVisible}
-          setEditMode={setEditMode}
         />
       )}
     </div>

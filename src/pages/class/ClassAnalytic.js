@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { ClipLoader } from "react-spinners";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
+import Form from "../../components/Form";
 
 const Base_url = process.env.REACT_APP_BACKEND_URL;
 
@@ -14,6 +15,10 @@ const ClassAnalytic = ({
   teacherName,
   handleEditSubmit,
   handleDelete,
+  editMode,
+  setEditMode,
+  setIsFormVisible,
+  setFormData,
 }) => {
   const [data, setData] = useState([]);
   const [columns, setColumns] = useState([]);
@@ -69,6 +74,16 @@ const ClassAnalytic = ({
     }
   };
 
+  async function handleEditData(id) {
+    console.log("id: ", id);
+    setIsFormVisible(true);
+    setEditMode(true);
+
+    const filteredData = await axios.get(`${Base_url}/fetch/class/${id}`);
+    console.log("filteredData: ", filteredData);
+    setFormData(filteredData);
+  }
+
   return (
     <div className="h-[100%] overflow-auto scrollbar bg-gradient-to-r from-blue-50 to-indigo-50">
       <div className="flex items-center gap-5 bg-gradient-to-r from-blue-500 to-indigo-600 p-6 rounded-t-xl text-white shadow-lg">
@@ -88,9 +103,10 @@ const ClassAnalytic = ({
           Student List
           <div className="flex gap-4 items-center">
             <FaRegEdit
-              className="text-4xl text-blue-400 hover:bg-gray-200 hover:text-blue-600 p-2 rounded-xl transition-all duration-300 ease-in-out shadow-lg hover:scale-110"
-              onClick={(e) => handleEditSubmit(e, itemId)}
+              className="text-4xl text-blue-400 hover:bg-gray-200 hover:text-blue-800 p-2 rounded-xl transition-all duration-300 ease-in-out shadow-lg hover:scale-110"
+              onClick={() => handleEditData(itemId)}
             />
+            {console.log("itemId in classAnalytics container", itemId)}
             <MdDeleteOutline
               className="text-4xl text-red-600 hover:bg-gray-200 hover:text-red-800 p-2 rounded-xl transition-all duration-300 ease-in-out shadow-lg hover:scale-110"
               onClick={(e) => handleDelete(itemId)}
@@ -113,7 +129,6 @@ const ClassAnalytic = ({
                 className="table-auto w-full text-left border-collapse pointer-events-none"
               />
             </div>
-
             <StudentChart data={filteredData} />
           </>
         )}
