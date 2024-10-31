@@ -5,6 +5,7 @@ import StudentChart from "../../components/StudentChart";
 import { ClipLoader } from "react-spinners";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const Base_url = process.env.REACT_APP_BACKEND_URL;
 
@@ -13,9 +14,12 @@ const ClassAnalytic = ({
   teacherName,
   handleDelete,
   setEditMode,
+  filteredItem,
   setIsFormVisible,
+  setFormData,
   setItemId,
-  itemId
+  itemId,
+  classData
 }) => {
   const [data, setData] = useState([]);
   const [columns, setColumns] = useState([]);
@@ -32,7 +36,7 @@ const ClassAnalytic = ({
   async function getData() {
     try {
       const res = await axios.get(`${Base_url}/fetch/student`);
-      let columnKeys = Object.keys(res.data[0]);
+      const columnKeys = Object.keys(res.data[0]);
       setData(res.data);
       setColumns(columnKeys);
     } catch (error) {
@@ -58,27 +62,20 @@ const ClassAnalytic = ({
     label: keyMapping[col] || col.charAt(0).toUpperCase() + col.slice(1),
   }));
 
-  // const handleStudentDelete = async (id) => {
-  //   try {
-  //     // setItemId(id);
-  //     await axios.delete(`${Base_url}/delete/student/${id}`);
-  //     toast.success(`Student deleted successfully!`);
-  //     await getData();
-  //   } catch (error) {
-  //     toast.error(`Cannot delete student!`);
-  //     console.error("Error deleting item:", error);
-  //   }
-  // };
-
   async function handleEditData(id) {
-    console.log("id: ", id);
-    setItemId(id)
-    setIsFormVisible(true);
-    setEditMode(true);
+    setItemId(id); 
+    setIsFormVisible(true); 
+    setEditMode(true); 
 
-    // const filteredData = await axios.get(`${Base_url}/fetch/class/${id}`);
-    // console.log("filteredData: ", filteredData);
-    // setFormData(filteredData);
+    const itemToEdit = classData.find((item) => item._id === id);
+    console.log("itemToEdit: ",itemToEdit);
+    
+    if (itemToEdit) {
+      setFormData(itemToEdit); 
+    } else {
+      console.warn(`Item with id ${id} not found.`);
+      toast.error("Item not found!");
+    }
   }
 
   return (
@@ -103,10 +100,9 @@ const ClassAnalytic = ({
               className="text-4xl text-blue-400 hover:bg-gray-200 hover:text-blue-800 p-2 rounded-xl transition-all duration-300 ease-in-out shadow-lg hover:scale-110"
               onClick={() => handleEditData(itemId)}
             />
-            {console.log("itemId in classAnalytics container")}
             <MdDeleteOutline
               className="text-4xl text-red-600 hover:bg-gray-200 hover:text-red-800 p-2 rounded-xl transition-all duration-300 ease-in-out shadow-lg hover:scale-110"
-              onClick={(e) => handleDelete(itemId)}
+              onClick={() => handleDelete(itemId)}
             />
           </div>
         </h1>
@@ -122,7 +118,6 @@ const ClassAnalytic = ({
                 type="StudentList"
                 data={filteredData}
                 headers={headers}
-                // handleDelete={handleStudentDelete}
                 className="table-auto w-full text-left border-collapse pointer-events-none"
               />
             </div>

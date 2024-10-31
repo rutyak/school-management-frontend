@@ -30,7 +30,6 @@ const ManagementComponent = ({
   const [formData, setFormData] = useState(formTemplate);
   const [loading, setLoading] = useState(false);
   const { setHideInput } = useOutletContext();
-  setHideInput(type === "Analytics");
   const [filteredItem, setFilteredItem] = useState([
     {
       address: "-",
@@ -59,6 +58,7 @@ const ManagementComponent = ({
     delete: `${Base_url}/delete/${type.toLowerCase()}`,
   };
 
+  setHideInput(type === "Analytics");
   const getData = useCallback(async () => {
     setLoading(true);
     try {
@@ -106,6 +106,7 @@ const ManagementComponent = ({
     getData();
   }, [getData]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  console.log("filteredItem: ",filteredItem);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -233,9 +234,11 @@ const ManagementComponent = ({
             // editMode={editMode}
             setEditMode={setEditMode}
             setIsFormVisible={setIsFormVisible}
+            filteredItem={filteredItem}
             setFormData={setFormData}
             setItemId={setItemId}
             itemId={itemId}
+            classData={data}
           />
         );
 
@@ -249,6 +252,7 @@ const ManagementComponent = ({
             setIsFormVisible={setIsFormVisible}
             setFormData={setFormData}
             setItemId={setItemId}
+            data={data}
           />
         );
     }

@@ -1,6 +1,7 @@
 import { FaRegEdit } from "react-icons/fa";
 import AttendanceLineGraph from "../graphs/AttendanceLineGraph";
 import { MdDeleteOutline } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const Info = ({
   filteredItem,
@@ -8,9 +9,9 @@ const Info = ({
   setEditMode,
   setIsFormVisible,
   setFormData,
-  setItemId
+  setItemId,
+  data
 }) => {
-
 
   const strConverter = (str) => {
     if (!str) return "";
@@ -21,7 +22,14 @@ const Info = ({
     setItemId(id);
     setIsFormVisible(true);
     setEditMode(true);
-    // setFormData(filteredItem);
+
+    const itemToEdit = data.find((item)=> item._id === id);
+
+    if(itemToEdit){
+       setFormData(itemToEdit);
+    } else {
+      toast.error("Item not found");
+    }
   }
 
   return (
