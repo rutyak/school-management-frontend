@@ -77,7 +77,7 @@ const Table = ({
             {data && data.length > 0 ? (
               data.map((item) => (
                 <>
-                {type==="Class" && console.log("classData...",item)}
+                {type==="Class" && console.log("iteeeem id i want...",item._id)}
                 <tr
                   key={item._id}
                   className={`border-b border-gray-200 cursor-pointer`}

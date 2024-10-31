@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaEdit, FaRegEdit } from "react-icons/fa";
+import { FaRegEdit } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import "../index.css";
 

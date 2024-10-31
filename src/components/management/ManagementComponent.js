@@ -161,7 +161,8 @@ const ManagementComponent = ({
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${apiEndpoints.delete}/${itemId}`);
+    
+      await axios.delete(`${apiEndpoints.delete}/${id}`);
       toast.success(`${type} deleted successfully!`);
       await getData();
     } catch (error) {
@@ -200,6 +201,8 @@ const ManagementComponent = ({
   });
 
   function handleItemClick(id, className, teacherName) {
+    console.log("id in conainer class id: ", id);
+    setItemId(id);
     setNewClassName({ className, teacher: teacherName });
     const filtered = data?.filter((item) => item._id === id);
     setFilteredItem(filtered);
@@ -231,6 +234,8 @@ const ManagementComponent = ({
             setEditMode={setEditMode}
             setIsFormVisible={setIsFormVisible}
             setFormData={setFormData}
+            setItemId={setItemId}
+            itemId={itemId}
           />
         );
 
@@ -243,6 +248,7 @@ const ManagementComponent = ({
             setEditMode={setEditMode}
             setIsFormVisible={setIsFormVisible}
             setFormData={setFormData}
+            setItemId={setItemId}
           />
         );
     }

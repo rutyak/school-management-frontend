@@ -1,29 +1,27 @@
 import { FaRegEdit } from "react-icons/fa";
 import AttendanceLineGraph from "../graphs/AttendanceLineGraph";
 import { MdDeleteOutline } from "react-icons/md";
-import { useState } from "react";
 
 const Info = ({
   filteredItem,
-  handleEditSubmit,
   handleDelete,
   setEditMode,
   setIsFormVisible,
   setFormData,
+  setItemId
 }) => {
 
-  const [filteredData, setFilteredData] = useState();
 
   const strConverter = (str) => {
     if (!str) return "";
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
-  function handleEditData(){
-    
+  function handleEditData(id){
+    setItemId(id);
     setIsFormVisible(true);
     setEditMode(true);
-    setFormData(filteredData);
+    // setFormData(filteredItem);
   }
 
   return (
