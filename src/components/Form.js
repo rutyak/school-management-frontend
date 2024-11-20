@@ -105,7 +105,7 @@ const Form = ({
   };
 
   const inputStyle =
-    "w-[90%] mx-1 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 mobile:p-1 lg:p-2";
+    "w-[96%] mx-1 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 mobile:p-1 lg:p-2";
   const labelStyle = "block text-gray-700 text-sm font-medium mb-2";
   const formContainerStyle =
     "relative w-[100%] max-w-lg p-8 bg-white rounded-lg shadow-lg mobile:p-4 mobile:w-[90%] lg:w-[600px] lg:p-8";
