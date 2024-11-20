@@ -45,7 +45,7 @@ const Analytics = () => {
   },[]);
 
   const totalIncome =
-   salaryView === "Yearly" ? 20000 * 12 * studentData : 20000 * studentData;
+   salaryView === "Yearly" ? 15000 * 12 * studentData : 15000 * studentData;
 
   return (
     <>

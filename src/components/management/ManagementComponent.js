@@ -212,9 +212,6 @@ const ManagementComponent = ({
       case "Analytics":
         return (
           <div className="p-4 bg-gray-50 h-full flex flex-col items-center mt-3 mobile:h-auto  mobile:p-2 sm:p-3 md:p-4 lg:h-full">
-            <h2 className="text-center text-xl font-semibold text-gray-700 mobile:text-md lg:text-xl">
-              Student Fees per Month: 15000/-
-            </h2>
             <AnalyticsChart
               teacherData={teacherData}
               totalIncome={totalIncome}
