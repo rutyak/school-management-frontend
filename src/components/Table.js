@@ -1,6 +1,5 @@
 import React from "react";
 import Form from "./Form";
-import "../index.css";
 
 const Table = ({
   type,

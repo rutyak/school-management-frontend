@@ -10,17 +10,17 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
+  // const [isChecked, setIsChecked] = useState(false);
 
   const { inputStyle } = useOutletContext();
   const navigate = useNavigate();
 
-  useEffect(()=>{
+  useEffect(() => {
     const token = localStorage.getItem("token");
-    if(token){
+    if (token) {
       navigate("/main");
     }
-  },[navigate])
+  }, [navigate]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -29,21 +29,25 @@ const Login = () => {
       email,
       password,
     };
+    console.log(obj);
 
     try {
       const res = await axios.post(`${Base_url}/login`, obj);
+      console.log("res ", res);
+
       if (res.status === 200) {
         toast.success(res.data.message);
 
-        if(isChecked){
-          localStorage.setItem("token",res.data.token);
-        }
-        navigate("/main"); 
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+
+        navigate("/main");
         setLoading(false);
       }
     } catch (error) {
       setLoading(false);
       toast.error("Invalid credentials");
+      console.error(error);
     }
   }
 
@@ -61,17 +65,27 @@ const Login = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <InputPassword name="password" type="password" placeholder="Enter password" state={password} setPassword={setPassword}/>
+        <InputPassword
+          name="password"
+          type="password"
+          placeholder="Enter password"
+          state={password}
+          setPassword={setPassword}
+        />
 
         <div className="flex justify-between items-center mb-11">
-          <div className="flex justify-center gap-2">
-            <input className="transform scale-150 ml-1" type="checkbox" onClick={(e)=>setIsChecked(e.target.checked)}/>
+          {/* <div className="flex justify-center gap-2">
+            <input
+              className="transform scale-150 ml-1"
+              type="checkbox"
+              onClick={(e) => setIsChecked(e.target.checked)}
+            />
             <span className="text-gray-700">Remember me</span>
-          </div>
-          <div className="hover:underline cursor-pointer" onClick={()=>navigate("/forgetpassword")}>Forgot Password?</div>
+          </div> */}
+          {/* <div className="hover:underline cursor-pointer" onClick={()=>navigate("/forgetpassword")}>Forgot Password?</div> */}
         </div>
         <button className="w-[40%] bg-purple-500 text-white p-3 rounded-xl text-md hover:bg-purple-600 transition-all duration-300 ease-in-out transform hover:scale-105 mb-20 lg:mb-10">
-          {loading? "Please wait...":"Login"}
+          {loading ? "Please wait..." : "Login"}
         </button>
       </form>
       <div className="text-gray-600">

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
-import "../index.css";
+const Base_url = process.env.REACT_APP_BACKEND_URL;
 
 const Form = ({
   type,
@@ -13,10 +14,33 @@ const Form = ({
   editStyle,
   editMode,
   resetForm,
-  setIsEditVisible, 
-  isEditVisible
+  setIsEditVisible,
+  isEditVisible,
 }) => {
   const [errorMessages, setErrorMessages] = useState({});
+  const [teachersData, setTeachersData] = useState({});
+  const [teachersList, setTeachersList] = useState([]);
+
+  useEffect(() => {
+    async function fetchTeachers() {
+      try {
+        const res = await axios.get(`${Base_url}/fetch/teacher`);
+        console.log("res: ", res);
+        setTeachersData(res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchTeachers();
+  }, []);
+
+  useEffect(()=>{
+      if(Array.isArray(teachersData)){
+        setTeachersList(teachersData.map((data)=>data.name));
+      }
+  },[teachersData]);
+
+  type === "class" && setTeachersList(teachersData?.filter((data) => data.name));
 
   const keyMapping = {
     name: "Name",
@@ -81,7 +105,7 @@ const Form = ({
   };
 
   const inputStyle =
-    "w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 mobile:p-1 lg:p-2";
+    "w-[90%] mx-1 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 mobile:p-1 lg:p-2";
   const labelStyle = "block text-gray-700 text-sm font-medium mb-2";
   const formContainerStyle =
     "relative w-[100%] max-w-lg p-8 bg-white rounded-lg shadow-lg mobile:p-4 mobile:w-[90%] lg:w-[600px] lg:p-8";
@@ -159,14 +183,7 @@ const Form = ({
       {
         name: "teacher",
         type: "select",
-        options: [
-          "Sakshi mam",
-          "Adarsh Padghan sir",
-          "Satyam sir",
-          "Balu sir",
-          "Mannu sir",
-          "Sami mam",
-        ],
+        options: teachersList,
       },
       {
         name: "classlimit",
@@ -185,13 +202,18 @@ const Form = ({
     <div>
       {!isFormVisible && (
         <button
-          onClick={() => editMode? setIsEditVisible(true): setIsFormVisible(true)}
+          onClick={() =>
+            editMode ? setIsEditVisible(true) : setIsFormVisible(true)
+          }
           className={
             "text-blue-500 border border-gray-300 rounded-lg bg-gray-50 hover:bg-gray-100 font-semibold py-2 px-4 transition-colors duration-300"
           }
         >
           {editMode ? (
-            <FaRegEdit className="text-4xl text-blue-400 p-2 transition-all duration-300 ease-in-out" onClick={()=>setIsEditVisible(true)}/>
+            <FaRegEdit
+              className="text-4xl text-blue-400 p-2 transition-all duration-300 ease-in-out"
+              onClick={() => setIsEditVisible(true)}
+            />
           ) : (
             `Add ${type}`
           )}
@@ -222,7 +244,7 @@ const Form = ({
 
                   {field.type === "select" ? (
                     <select
-                      name={field.name}
+                      name={field?.name}
                       className={inputStyle}
                       onChange={handleFormData}
                       value={formData[field.name] || ""}
@@ -230,7 +252,7 @@ const Form = ({
                     >
                       <option value="">Select</option>
                       {field.options.map((option) => (
-                        <option key={option} value={option.toLowerCase()}>
+                        <option key={option} value={option?.toLowerCase()}>
                           {option}
                         </option>
                       ))}

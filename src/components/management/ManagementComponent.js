@@ -13,8 +13,6 @@ const ManagementComponent = ({
   formTemplate,
   keyMapping,
   search,
-  setSearch,
-  buttonStyle,
   toggleView,
   salaryView,
   setSalaryView,

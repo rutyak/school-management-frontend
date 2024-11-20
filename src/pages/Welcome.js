@@ -5,7 +5,6 @@ const Welcome = () => {
 
   const inputStyle = "w-full p-4 border border-gray-300 rounded-lg mb-s shadow-sm transition-all duration-300 focus:ring-4 focus:ring-purple-500";
 
-
   return (
     <div className="w-full h-screen flex justify-center items-center bg-gradient-to-r from-blue-500 to-purple-200">
       <div className="w-[90%] h-[95%] flex justify-evenly  bg-white shadow-2xl border rounded-xl p-3 border-purple-300 mobile:w-full mobile:h-auto md:w-[80%] lg:w-[95%] lg:gap-12 lg:h-[92%] xl:gap-28 xl:h-[95%] xl:w-[90%]">

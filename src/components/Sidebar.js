@@ -51,7 +51,7 @@ const Sidebar = ({ openMenu, setOpenMenu }) => {
           onClick={() => handleLinkClicked("Class")}
         >
           <SiGoogleclassroom className={iconStyle} />
-          <span className="text-lg hidden xl:block">Class</span>
+          <span className="text-lg hidden xl:block">Courses</span>
         </Link>
 
         <Link
