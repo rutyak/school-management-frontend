@@ -185,7 +185,6 @@ const ManagementComponent = ({
   const handleToggleView = async (view) => {
     setSalaryView(view);
     toggleView(view);
-    await getData();
   };
 
   const filteredData = data?.filter((item) => {
@@ -255,7 +254,7 @@ const ManagementComponent = ({
   
   return (
     <div className="w-full h-[calc(85%+4px)] flex gap-5 items-center justify-center mobile:flex-col mobile:w-full mobile:h-auto mobile:gap-5 lg:flex-row lg:gap-3 lg:w-full lg:h-[calc(85%+10px)] xl:gap-5 xl:h-[calc(85%+4px)]">
-      <div className="student-list w-[calc(38% + 6px)] p-1 h-full border rounded-xl bg-white mobile:w-full lg:w-[45%] xl:w-[calc(45%+16px)]">
+      <div className="student-list w-[calc(38% + 6px)] p-1 h-full border rounded-xl bg-white mobile:w-[full] lg:w-[45%] xl:w-[calc(45%+16px)]">
         <Management
           type={type}
           salaryView={salaryView}
