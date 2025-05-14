@@ -92,7 +92,7 @@ const ClassAnalytic = ({
         </div>
       </div>
 
-      <div className="w-full max-w-5xl mx-auto bg-white rounded-lg shadow-lg p-8 mt-4 mobile:p-2 sm:p-4 md:p-6 lg:p-8">
+      <div className="w-full max-w-5xl mx-auto bg-white rounded-lg shadow-lg p-5 mt-4">
         <h1 className="text-3xl flex items-center justify-between font-bold text-gray-800 mb-6">
           Student List
           <div className="flex gap-4 items-center">

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
+
 const Base_url = process.env.REACT_APP_BACKEND_URL;
 
 const Form = ({
@@ -25,26 +26,27 @@ const Form = ({
     async function fetchTeachers() {
       try {
         const res = await axios.get(`${Base_url}/fetch/teacher`);
-        console.log("res: ", res);
         setTeachersData(res.data);
       } catch (error) {
-        console.error(error);
+        console.error("Error fetching teachers:", error);
       }
     }
+
     fetchTeachers();
   }, []);
 
-  useEffect(()=>{
-      if(Array.isArray(teachersData)){
-        setTeachersList(teachersData.map((data)=>data.name));
-      }
-  },[teachersData]);
+  useEffect(() => {
+    if (Array.isArray(teachersData)) {
+      setTeachersList(teachersData.map((data) => data.name));
+    }
+  }, [teachersData]);
 
-  type === "class" && setTeachersList(teachersData?.filter((data) => data.name));
+  if (type === "class") {
+    setTeachersList(teachersData?.filter((data) => data.name));
+  }
 
   const keyMapping = {
     name: "Name",
-    // photo: "Photo",
     id: type === "Teacher" ? "Id no." : "Roll no.",
     gender: "Gender",
     dob: "Date of Birth",
@@ -64,7 +66,6 @@ const Form = ({
 
   const handleFormData = (e) => {
     const { name, value, files } = e.target;
-
     if (name === "photo" && files.length > 0) {
       setFormData({ ...formData, [name]: files[0] });
     } else {
@@ -105,15 +106,16 @@ const Form = ({
   };
 
   const inputStyle =
-    "w-[96%] mx-1 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 mobile:p-1 lg:p-2";
+    "w-[96%] mx-1 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 lg:p-2";
+
   const labelStyle = "block text-gray-700 text-sm font-medium mb-2";
+
   const formContainerStyle =
-    "relative w-[100%] max-w-lg p-8 bg-white rounded-lg shadow-lg mobile:p-4 mobile:w-[90%] lg:w-[600px] lg:p-8";
+    "relative w-[100%] max-w-lg p-8 bg-white rounded-lg shadow-lg lg:w-[600px] lg:p-8";
 
   const formFields = {
     Student: [
       { name: "name", type: "text", placeholder: "Enter your name" },
-      // { name: "photo", type: "file" },
       { name: "id", type: "text", placeholder: "eg. ts-234" },
       { name: "gender", type: "select", options: ["Male", "Female", "Other"] },
       { name: "dob", type: "date" },
@@ -122,26 +124,14 @@ const Form = ({
       {
         name: "className",
         type: "select",
-        options: [
-          "Mathematics",
-          "Science",
-          "Physics",
-          "Biology",
-          "Chemistry",
-          "English",
-        ],
+        options: ["Mathematics", "Science", "Physics", "Biology", "Chemistry", "English"],
       },
       { name: "father", type: "text", placeholder: "Enter your father's name" },
-      {
-        name: "attendance",
-        type: "number",
-        placeholder: "Enter attendance in %",
-      },
+      { name: "attendance", type: "number", placeholder: "Enter attendance in %" },
       { name: "address", type: "text", placeholder: "Enter your address" },
     ],
     Teacher: [
       { name: "name", type: "text", placeholder: "Enter your name" },
-      // { name: "photo", type: "file" },
       { name: "id", type: "text" },
       { name: "gender", type: "select", options: ["Male", "Female", "Other"] },
       { name: "dob", type: "date" },
@@ -150,51 +140,21 @@ const Form = ({
       {
         name: "assignedClass",
         type: "select",
-        options: [
-          "Mathematics",
-          "Science",
-          "Physics",
-          "Biology",
-          "Chemistry",
-          "English",
-        ],
+        options: ["Mathematics", "Science", "Physics", "Biology", "Chemistry", "English"],
       },
       { name: "father", type: "text", placeholder: "Enter your father's name" },
-      {
-        name: "classconducted",
-        type: "number",
-        placeholder: "Enter total class conducted",
-      },
+      { name: "classconducted", type: "number", placeholder: "Enter total class conducted" },
       { name: "address", type: "text", placeholder: "Enter your address" },
     ],
     Class: [
       {
         name: "className",
         type: "select",
-        options: [
-          "Mathematics",
-          "Science",
-          "Physics",
-          "Biology",
-          "Chemistry",
-          "English",
-        ],
+        options: ["Mathematics", "Science", "Physics", "Biology", "Chemistry", "English"],
       },
-      {
-        name: "teacher",
-        type: "select",
-        options: teachersList,
-      },
-      {
-        name: "classlimit",
-        type: "number",
-        placeholder: "Enter class limit",
-      },
-      {
-        name: "year",
-        type: "select",
-        options: ["2018", "2019", "2020", "2021", "2022", "2023"],
-      },
+      { name: "teacher", type: "select", options: teachersList },
+      { name: "classlimit", type: "number", placeholder: "Enter class limit" },
+      { name: "year", type: "select", options: ["2018", "2019", "2020", "2021", "2022", "2023"] },
     ],
   };
 
@@ -202,18 +162,11 @@ const Form = ({
     <div>
       {!isFormVisible && (
         <button
-          onClick={() =>
-            editMode ? setIsEditVisible(true) : setIsFormVisible(true)
-          }
-          className={
-            "text-blue-500 border border-gray-300 rounded-lg bg-gray-50 hover:bg-gray-100 font-semibold py-2 px-4 transition-colors duration-300"
-          }
+          onClick={() => (editMode ? setIsEditVisible(true) : setIsFormVisible(true))}
+          className="text-blue-500 border border-gray-300 rounded-lg bg-gray-50 hover:bg-gray-100 font-semibold py-2 px-4 transition-colors duration-300"
         >
           {editMode ? (
-            <FaRegEdit
-              className="text-4xl text-blue-400 p-2 transition-all duration-300 ease-in-out"
-              onClick={() => setIsEditVisible(true)}
-            />
+            <FaRegEdit className="text-4xl text-blue-400 p-2 transition-all duration-300 ease-in-out" />
           ) : (
             `Add ${type}`
           )}
@@ -230,11 +183,9 @@ const Form = ({
             >
               <MdClose className="h-6 w-6" />
             </button>
-            <form
-              onSubmit={handleSubmitWithValidation}
-              className="max-h-[530px] overflow-y-auto scrollbar"
-            >
-              <h2 className="text-2xl font-bold mb-5 text-center text-gray-800 mobile:text-xl lg:text-2xl">
+
+            <form onSubmit={handleSubmitWithValidation} className="max-h-[530px] overflow-y-auto scrollbar">
+              <h2 className="text-2xl font-bold mb-5 text-center text-gray-800 lg:text-2xl">
                 {type} Registration Form
               </h2>
 
@@ -244,7 +195,7 @@ const Form = ({
 
                   {field.type === "select" ? (
                     <select
-                      name={field?.name}
+                      name={field.name}
                       className={inputStyle}
                       onChange={handleFormData}
                       value={formData[field.name] || ""}
@@ -252,23 +203,12 @@ const Form = ({
                     >
                       <option value="">Select</option>
                       {field.options.map((option) => (
-                        <option key={option} value={option?.toLowerCase()}>
+                        <option key={option} value={option.toLowerCase()}>
                           {option}
                         </option>
                       ))}
                     </select>
                   ) : (
-                    // ) : field.type === "file" ? (
-                    //   <input
-                    //     name={field.name}
-                    //     className={`${inputStyle} bg-blue-200`}
-                    //     type="file"
-                    //     accept="image/*"
-                    //     onChange={handleFormData}
-
-                    //     placeholder="Add image"
-                    //     required
-                    //   />
                     <input
                       name={field.name}
                       className={inputStyle}
@@ -281,9 +221,7 @@ const Form = ({
                   )}
 
                   {errorMessages[field.name] && (
-                    <p className="text-red-500 text-sm">
-                      {errorMessages[field.name]}
-                    </p>
+                    <p className="text-red-500 text-sm">{errorMessages[field.name]}</p>
                   )}
                 </div>
               ))}
@@ -291,9 +229,9 @@ const Form = ({
               <div className="mb-5">
                 <button
                   type="submit"
-                  className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-lg transition-colors duration-300"
+                  className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md transition-colors"
                 >
-                  {editMode ? "Update" : "Submit"}
+                  Submit
                 </button>
               </div>
             </form>

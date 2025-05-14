@@ -18,7 +18,13 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const CustomeDrawer = ({ type }) => {
+const CustomeDrawer = ({
+  type,
+  baseStyle,
+  activeStyle,
+  active,
+  handleLinkClicked,
+}) => {
   const [userData, setUserData] = useState({});
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
@@ -34,12 +40,15 @@ const CustomeDrawer = ({ type }) => {
   useEffect(() => {
     try {
       const user = localStorage.getItem("user");
-      const parsedUser = user? JSON.parse(user): null;
+      const parsedUser = user ? JSON.parse(user) : null;
       setUserData(parsedUser);
     } catch (error) {
       console.log(error);
     }
   }, []);
+
+  console.log("active $$$$$$$$$$$$$$$$$$$$$$$$$$: ", activeStyle);
+
 
   return (
     <>
@@ -54,16 +63,21 @@ const CustomeDrawer = ({ type }) => {
             onClick={onOpen}
             cursor="pointer"
             src="https://bit.ly/dan-abramov"
-            className="transition-tranform duration-300 ease-in-out mobile:text-sm"
+            className="transition-tranform duration-300 ease-in-out"
           />
         ) : (
           <div
-            onClick={onOpen}
             ref={btnRef}
-            className="flex gap-0.5 items-center"
+            className={`${baseStyle} w-[198px] ${
+              active === "Settings" ? activeStyle : ""
+            }`}
+            onClick={() => {
+              handleLinkClicked("Settings");
+              onOpen();
+            }}
           >
-            <IoSettingsOutline className="w-6 h-6 mobile:ml-0 mobile:w-auto sm:w-7 sm:h-7 md:w-6 md:h-6 mr-2 " />
-            <span className="text-lg hidden xl:block">Settings</span>
+            <IoSettingsOutline className="w-6 h-6 xl:w-7 xl:h-7" />
+            <span className="hidden xl:block">Settings</span>
           </div>
         )}
       </WrapItem>

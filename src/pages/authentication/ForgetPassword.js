@@ -12,7 +12,8 @@ const ForgetPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [varified, setVarified] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { inputStyle } = useOutletContext();
+  const inputStyle =
+    "w-full p-2 md:p-4 border border-gray-300 rounded-lg mb-s shadow-sm transition-all duration-300 focus:ring-4 focus:ring-purple-500";
 
   const navigate = useNavigate();
 
@@ -35,7 +36,6 @@ const ForgetPassword = () => {
   };
 
   const handleReset = async () => {
-
     if (password !== confirmPassword) {
       toast.error("Password's not matching");
       return;
@@ -95,8 +95,20 @@ const ForgetPassword = () => {
 
           {varified && (
             <>
-              <InputPassword name="password" type="password" placeholder="New password" state={password} setPassword={setPassword}/>
-              <InputPassword name="confirmPassword" type="password" placeholder="New Confirm Password" state={confirmPassword} setPassword={setConfirmPassword}/>
+              <InputPassword
+                name="password"
+                type="password"
+                placeholder="New password"
+                state={password}
+                setPassword={setPassword}
+              />
+              <InputPassword
+                name="confirmPassword"
+                type="password"
+                placeholder="New Confirm Password"
+                state={confirmPassword}
+                setPassword={setConfirmPassword}
+              />
             </>
           )}
           <button

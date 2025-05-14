@@ -210,7 +210,7 @@ const ManagementComponent = ({
     switch (type) {
       case "Analytics":
         return (
-          <div className="p-4 bg-gray-50 h-full flex flex-col items-center mt-3 mobile:h-auto  mobile:p-2 sm:p-3 md:p-4 lg:h-full">
+          <div className="p-4 h-full flex flex-col items-center mt-3 sm:p-3 md:p-4 lg:h-full">
             <AnalyticsChart
               teacherData={teacherData}
               totalIncome={totalIncome}
@@ -225,7 +225,6 @@ const ManagementComponent = ({
             teacherName={newClassName?.teacher}
             handleEditSubmit={handleEditSubmit}
             handleDelete={handleDelete}
-            // editMode={editMode}
             setEditMode={setEditMode}
             setIsFormVisible={setIsFormVisible}
             filteredItem={filteredItem}
@@ -253,8 +252,8 @@ const ManagementComponent = ({
   };
   
   return (
-    <div className="w-full h-[calc(85%+4px)] flex gap-5 items-center justify-center mobile:flex-col mobile:w-full mobile:h-auto mobile:gap-5 lg:flex-row lg:gap-3 lg:w-full lg:h-[calc(85%+10px)] xl:gap-5 xl:h-[calc(85%+4px)]">
-      <div className="student-list w-[calc(38% + 6px)] p-1 h-full border rounded-xl bg-white mobile:w-[full] lg:w-[45%] xl:w-[calc(45%+16px)]">
+    <div className="w-full lg:h-[90%] flex gap-5 items-center justify-center lg:flex-row lg:gap-3 lg:w-full xl:gap-5 p-2 xl:p-0 xl:py-5">
+      <div className="w-[40%] lg:h-full student-list p-1 border rounded-xl bg-white ">
         <Management
           type={type}
           salaryView={salaryView}
@@ -275,7 +274,7 @@ const ManagementComponent = ({
           handleSubmit={editMode ? handleEditSubmit : handleSubmit}
         />
       </div>
-      <div className="student-info h-full w-[60%] border rounded-xl bg-white shadow-md p-2 mobile:w-full mobile:h-auto md:w-[90%] md:h-full lg:h-full lg:w-[calc(52%-3px)] xl:w-[52%]">
+      <div className="flex-1 border lg:h-full rounded-xl bg-white shadow-md p-2 md:h-full lg:overflow-y-auto">
         {renderContent()}
       </div>
     </div>

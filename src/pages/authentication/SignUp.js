@@ -10,35 +10,35 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const inputStyle =
+    "w-full p-2 md:p-4 border border-gray-300 rounded-lg mb-s shadow-sm transition-all duration-300 focus:ring-4 focus:ring-purple-500";
 
-  const { inputStyle } = useOutletContext();
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
-    e.preventDefault();    
-    if(password !== confirmPassword){
+    e.preventDefault();
+    if (password !== confirmPassword) {
       toast.error("Password's not matching");
       return;
     }
-    
+
     setLoading(true);
 
     try {
       const obj = {
         email,
-        password
-      }
-      const res = await axios.post(`${Base_url}/signup`,obj);
-      if(res.status === 201) {
+        password,
+      };
+      const res = await axios.post(`${Base_url}/signup`, obj);
+      if (res.status === 201) {
         setLoading(false);
         toast.success("User registered successfully !");
-        navigate("/"); 
+        navigate("/");
       }
     } catch (error) {
       setLoading(false);
       toast.error("User already registered");
     }
-   
   }
 
   // function handleGoogleSignUp() {
@@ -46,9 +46,9 @@ const SignUp = () => {
   // }
 
   return (
-    <div className="w-[100%] flex flex-col p-3 mb-4 animate-sideInLeft mt-10 md:mt-5">
-      <h1 className="text-4xl font-bold text-gray-800 mb-2">Sign Up</h1>
-      <h3 className="text-md text-gray-600 mb-6">
+    <div className="w-[100%] flex flex-col p-3 mb-4 animate-sideInLeft mt-20 md:mt-28 xl:mt-5">
+      <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold text-gray-800 mb-2">Sign Up</h1>
+      <h3 className="text-sm md:text-md text-gray-600 mb-6">
         Create your account to keep up with school news!
       </h3>
 
@@ -78,15 +78,27 @@ const SignUp = () => {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <InputPassword name="password" type="password" placeholder="Enter password" state={password} setPassword={setPassword}/>
-        <InputPassword name="confirmPassword" type="password" placeholder="New Confirm Password" state={confirmPassword} setPassword={setConfirmPassword}/>
+        <InputPassword
+          name="password"
+          type="password"
+          placeholder="Enter password"
+          state={password}
+          setPassword={setPassword}
+        />
+        <InputPassword
+          name="confirmPassword"
+          type="password"
+          placeholder="New Confirm Password"
+          state={confirmPassword}
+          setPassword={setConfirmPassword}
+        />
 
-        <button className="w-[40%] bg-purple-500 text-white p-3 rounded-xl text-md hover:bg-purple-600 transition-all duration-300 ease-in-out transform hover:scale-105">
-          { loading? "Please wait...": "Sign Up"}
+        <button className="w-auto bg-purple-500 text-white px-5 py-2 md:px-6 md:py-3 rounded-xl text-md hover:bg-purple-600 transition-all duration-300 ease-in-out transform hover:scale-105 absolute bottom-36">
+          {loading ? "Please wait..." : "Sign Up"}
         </button>
       </form>
 
-      <div className="text-gray-600 mt-4">
+      <div className="text-gray-600 absolute bottom-24">
         Have an account already?{" "}
         <span
           className="text-purple-500 hover:underline cursor-pointer"

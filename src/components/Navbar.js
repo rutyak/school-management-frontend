@@ -3,46 +3,42 @@ import { FaBell } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
 import CustomeDrawer from "./CustomeDrawer";
 
-const Navbar = ({
-  handleToggleMenu,
-  setSearch,
-  search,
-  hideInput,
-  linkType,
-}) => {
+const Navbar = ({ handleToggleMenu, setSearch, search, hideInput, linkType }) => {
   return (
-    <>
-      <nav className="w-full mb-[20px] border rounded-xl bg-white px-8 shadow-lg z-20 mobile:px-3 mobile:flex mobile:gap-4 mobile:items-center mobile:rounded-none mobile:py-2 mobile:h-17 md:h-19 lg:mb-[11px] lg:h-20 xl:mb-[20px] xl:px-8 xl:rounded-xl">
+    <nav className="flex-1 bg-white xl:rounded-xl shadow-md border px-6 py-4 flex items-center justify-between z-20 
+      md:h-18 lg:h-20 transition-all duration-300">
+      
+      <div className="flex items-center gap-4">
         <GiHamburgerMenu
-          className="text-2xl block mobile:text-2xl xl:hidden"
+          className="text-3xl text-gray-700 cursor-pointer hover:text-blue-500 xl:hidden"
           onClick={handleToggleMenu}
         />
-        <div className="w-full flex justify-between items-center">
-          <div className="text-black text-3xl font-bold mobile:text-[18px] modile:leading-[24px] md:text-2xl">
-            {linkType.toUpperCase()}
-          </div>
+        <h1 className="text-2xl font-semibold text-gray-800 md:text-xl tracking-wide">
+          {linkType.toUpperCase()}
+        </h1>
+      </div>
 
-        {hideInput ? (
-          <div className="hidden"></div>
-        ) : (
-          <div className="relative w-[60%] mobile:w-[75%] sm:w-[70%] md:w-[65%] lg:w-[60%]">
-            <FiSearch className="absolute top-1/2 transform -translate-y-1/2 left-3 text-gray-400" />
-            <input
-              type="text"
-              className="w-full py-2 pl-10 pr-4 border border-gray-300 rounded-md focus:ring-blue-400 focus:outline-none focus:ring-2 mobile:h-8 md:h-9 lg:h-10"
-              placeholder="Search"
-              onChange={(e) => setSearch(e.target.value)}
-              value={search}
-            />
-          </div>
-        )}
-          <div className="flex justify-center items-center gap-4 hidden sm:flex">
-            <FaBell className="text-xl cursor-pointer" />
-            <CustomeDrawer />
-          </div>
+      {!hideInput && (
+        <div className="relative w-[60%] xl:w-[50%]">
+          <FiSearch className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400" />
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search..."
+            className="w-full py-2 pl-10 pr-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none transition duration-200 text-sm md:text-base shadow-sm"
+          />
         </div>
-      </nav>
-    </>
+      )}
+
+      <div className="hidden sm:flex items-center gap-5">
+        <div className="relative cursor-pointer">
+          <FaBell className="text-xl text-gray-600 hover:text-blue-500 transition" />
+          <span className="absolute top-0 right-0 bg-red-500 h-2 w-2 rounded-full"></span>
+        </div>
+        <CustomeDrawer />
+      </div>
+    </nav>
   );
 };
 

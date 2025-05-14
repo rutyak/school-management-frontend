@@ -21,43 +21,43 @@ const Management = ({
   setItemId,
   handleSubmit
 }) => {
+  const isAnalytics = type === "Analytics";
 
   return (
-    <div className="w-full p-4 space-y-6 mobile:w-full mobile:p-2 sm:p-4 md:p-4 lg:p-4 lg:w-full">
-      <div className="flex justify-between items-center">
-        <h1 className="text-xl font-semibold text-gray-600">
-          {type === "Analytics" ? type : `${type} List`}
+    <div className="w-full p-4 space-y-6 lg:w-full">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <h1 className="text-2xl font-bold text-gray-700">
+          {isAnalytics ? "Analytics" : `${type} List`}
         </h1>
-        {type === "Analytics" ? (
-          <div className="space-x-2">
-            <button
-              className={`px-4 py-2 font-semibold rounded-md transition-transform transform hover:scale-105 ${
-                salaryView === "Monthly" ? "bg-blue-600 text-white" : "bg-gray-100 text-gray-700"
-              }`}
-              onClick={() => handleToggleView("Monthly")}
-            >
-              Monthly
-            </button>
-            
-            <button
-              className={`px-4 py-2 font-semibold rounded-md transition-transform transform hover:scale-105 ${
-                salaryView === "Yearly" ? "bg-blue-600 text-white" : "bg-gray-100 text-gray-700"
-              }`}
-              onClick={() => handleToggleView("Yearly")}
-            >
-              Yearly
-            </button>
+
+        {isAnalytics ? (
+          <div className="flex gap-2">
+            {["Monthly", "Yearly"].map((view) => (
+              <button
+                key={view}
+                className={`px-5 py-2 rounded-md font-semibold transition-all duration-200 ease-in-out transform hover:scale-105 ${
+                  salaryView === view
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-200 text-gray-700"
+                }`}
+                onClick={() => handleToggleView(view)}
+              >
+                {view}
+              </button>
+            ))}
           </div>
         ) : (
           <button
-            className="bg-gray-200 text-blue-400 px-4 py-2 rounded-md shadow hover:bg-gray-300 transition-transform transform hover:scale-105"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-2 rounded-md shadow-md transition-transform transform hover:scale-105"
             onClick={() => setIsFormVisible(!isFormVisible)}
           >
-             {`Add ${type}`}
+            {`Add ${type}`}
           </button>
         )}
       </div>
 
+      {/* Form */}
       {isFormVisible && (
         <Form
           type={type}
@@ -71,11 +71,12 @@ const Management = ({
         />
       )}
 
-      <hr className="w-full border-gray-300 my-3" />
+      <hr className="border-t border-gray-300 my-4" />
 
+      {/* Loader or Table */}
       {loading ? (
-        <div className="flex justify-center py-6">
-          <div className="w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+        <div className="flex justify-center items-center py-8">
+          <div className="w-12 h-12 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
         </div>
       ) : (
         <Table

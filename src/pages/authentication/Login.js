@@ -11,8 +11,9 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   // const [isChecked, setIsChecked] = useState(false);
+  const inputStyle =
+    "w-full p-2 md:p-4 border border-gray-300 rounded-lg mb-s shadow-sm transition-all duration-300 focus:ring-4 focus:ring-purple-500";
 
-  const { inputStyle } = useOutletContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -52,9 +53,11 @@ const Login = () => {
   }
 
   return (
-    <div className="w-[100%] flex flex-col p-3 mb-4 animate-sideInLeft mt-20 md:mt-10 lg:mt-15 xl:mt-20">
-      <h1 className="text-4xl font-bold text-gray-800 mb-2">Welcome Back!</h1>
-      <h3 className="text-md text-gray-600 mb-6">
+    <div className="w-[100%] flex flex-col p-3 mb-4 animate-sideInLeft mt-24 md:mt-32 xl:mt-20">
+      <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold text-gray-800 mb-2">
+        Welcome Back!
+      </h1>
+      <h3 className="text-sm  md:text-md text-gray-600 mb-6">
         Hey, Welcome back to your special place
       </h3>
       <form onSubmit={handleSubmit}>
@@ -84,11 +87,11 @@ const Login = () => {
           </div> */}
           {/* <div className="hover:underline cursor-pointer" onClick={()=>navigate("/forgetpassword")}>Forgot Password?</div> */}
         </div>
-        <button className="w-[40%] bg-purple-500 text-white p-3 rounded-xl text-md hover:bg-purple-600 transition-all duration-300 ease-in-out transform hover:scale-105 mb-20 lg:mb-10">
+        <button className="w-auto bg-purple-500 text-white px-5 py-2 md:py-3 md:px-6 rounded-xl text-md hover:bg-purple-600 transition-all duration-300 ease-in-out transform hover:scale-105 absolute bottom-36">
           {loading ? "Please wait..." : "Login"}
         </button>
       </form>
-      <div className="text-gray-600">
+      <div className="text-gray-600 absolute bottom-24">
         Don't have an account?{" "}
         <span
           className="text-purple-500 hover:underline cursor-pointer"

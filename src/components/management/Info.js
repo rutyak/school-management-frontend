@@ -55,7 +55,7 @@ const Info = ({
             </div>
           </div>
           {console.log("student id...", item._id)}
-          <div className="basic-details p-6 bg-gray-50 rounded-b-xl mobile:px-2 mobile:py-3 sm:p-4 md:p-5 lg:p-6">
+          <div className="basic-details p-6 bg-gray-50 rounded-b-xl sm:p-4 md:p-5 lg:p-6">
             <h3 className="text-lg flex justify-between items-center font-semibold text-gray-700 mb-2 border-b border-gray-300 pb-2">
               Basic Details
               <div className="flex gap-4 items-center">
@@ -111,7 +111,7 @@ const Info = ({
             </div>
           </div>
 
-          <div className="progress-section mt-4 p-6 bg-gray-50 rounded-xl mobile:p-2 sm:p-3 md:p-5 lg:p-6">
+          <div className="progress-section mt-4 p-6 bg-gray-50 rounded-xl sm:p-3 md:p-5 lg:p-6">
             <h3 className="text-lg font-semibold text-gray-700 mb-4">
               Progress
             </h3>
