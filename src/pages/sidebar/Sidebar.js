@@ -6,7 +6,7 @@ import { FiSettings } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import CustomeDrawer from "./CustomeDrawer";
+import CustomeDrawer from "../drawer/CustomeDrawer";
 import { useDisclosure } from "@chakra-ui/react";
 
 const Sidebar = ({ openMenu, setOpenMenu }) => {

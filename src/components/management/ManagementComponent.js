@@ -104,7 +104,7 @@ const ManagementComponent = ({
     getData();
   }, [getData]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  console.log("filteredItem: ",filteredItem);
+  console.log("filteredItem: ", filteredItem);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -160,7 +160,6 @@ const ManagementComponent = ({
 
   const handleDelete = async (id) => {
     try {
-    
       await axios.delete(`${apiEndpoints.delete}/${id}`);
       toast.success(`${type} deleted successfully!`);
       await getData();
@@ -250,10 +249,10 @@ const ManagementComponent = ({
         );
     }
   };
-  
+
   return (
-    <div className="w-full lg:h-[90%] flex gap-5 items-center justify-center lg:flex-row lg:gap-3 lg:w-full xl:gap-5 p-2 xl:p-0 xl:py-5">
-      <div className="w-[40%] lg:h-full student-list p-1 border rounded-xl bg-white ">
+    <div className="w-full h-full flex gap-5 items-center justify-center flex-col lg:flex-row lg:gap-3 lg:w-full xl:gap-5 p-2 xl:p-0 xl:py-5">
+      <div className="lg:w-[40%] lg:h-full student-list p-1 border rounded-xl bg-white ">
         <Management
           type={type}
           salaryView={salaryView}
@@ -274,7 +273,7 @@ const ManagementComponent = ({
           handleSubmit={editMode ? handleEditSubmit : handleSubmit}
         />
       </div>
-      <div className="flex-1 border lg:h-full rounded-xl bg-white shadow-md p-2 md:h-full lg:overflow-y-auto">
+      <div className="lg:flex-1 border rounded-xl bg-white shadow-md p-2 lg:h-full lg:overflow-y-auto">
         {renderContent()}
       </div>
     </div>

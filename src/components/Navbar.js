@@ -1,7 +1,7 @@
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaBell } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
-import CustomeDrawer from "./CustomeDrawer";
+import CustomeDrawer from "../pages/drawer/CustomeDrawer";
 
 const Navbar = ({ handleToggleMenu, setSearch, search, hideInput, linkType }) => {
   return (

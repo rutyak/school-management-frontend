@@ -47,8 +47,6 @@ const CustomeDrawer = ({
     }
   }, []);
 
-  console.log("active $$$$$$$$$$$$$$$$$$$$$$$$$$: ", activeStyle);
-
 
   return (
     <>
@@ -91,7 +89,7 @@ const CustomeDrawer = ({
         <DrawerOverlay />
         <DrawerContent
           w={{ base: "30%", md: "30%", lg: "23%" }}
-          className="relative !w-[300px] bg-white shadow-lg rounded-lg transition-all duration-300 ease-in-out transform translate-x-0"
+          className="relative !w-[300px] bg-white shadow-lg transition-all duration-300 ease-in-out transform translate-x-0"
         >
           <DrawerCloseButton className="absolute top-2 right-6 text-gray-500  py-2 hover:text-gray-700 transition duration-300" />
 
