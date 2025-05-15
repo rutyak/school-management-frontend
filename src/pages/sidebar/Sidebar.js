@@ -2,7 +2,6 @@ import { SiGoogleclassroom } from "react-icons/si";
 import { PiStudentDuotone } from "react-icons/pi";
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
-import { FiSettings } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -11,7 +10,7 @@ import { useDisclosure } from "@chakra-ui/react";
 
 const Sidebar = ({ openMenu, setOpenMenu }) => {
   const [active, setActive] = useState("Class");
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { onOpen } = useDisclosure();
 
   const baseStyle =
     "flex items-center gap-3 text-white text-lg xl:text-xl font-medium py-3 px-4 rounded-lg transition-all duration-300 ease-in-out hover:bg-white/10 hover:translate-x-2";
