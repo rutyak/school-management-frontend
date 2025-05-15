@@ -27,7 +27,7 @@ const Sidebar = ({ openMenu, setOpenMenu }) => {
   };
 
   return (
-    <div className="h-screen bg-gradient-to-b from-blue-900 to-blue-700 p-4 shadow-lg relative hidden xl:block">
+    <div className="h-screen bg-gradient-to-b from-blue-900 to-blue-700 p-4 shadow-lg relative">
       {/* Logo */}
       <div className="flex items-center justify-center pb-10">
         <div className="flex items-center gap-3">

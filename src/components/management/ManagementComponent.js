@@ -252,7 +252,7 @@ const ManagementComponent = ({
 
   return (
     <div className="w-full h-full flex gap-5 items-center justify-center flex-col lg:flex-row lg:gap-3 lg:w-full xl:gap-5 p-2 xl:p-0 xl:py-5">
-      <div className="lg:w-[40%] lg:h-full student-list p-1 border rounded-xl bg-white ">
+      <div className="w-full lg:w-[40%] lg:h-full student-list p-1 border rounded-xl bg-white ">
         <Management
           type={type}
           salaryView={salaryView}
@@ -273,7 +273,7 @@ const ManagementComponent = ({
           handleSubmit={editMode ? handleEditSubmit : handleSubmit}
         />
       </div>
-      <div className="lg:flex-1 border rounded-xl bg-white shadow-md p-2 lg:h-full lg:overflow-y-auto">
+      <div className="w-full lg:flex-1 border rounded-xl bg-white shadow-md p-2 lg:h-full lg:overflow-y-auto">
         {renderContent()}
       </div>
     </div>
