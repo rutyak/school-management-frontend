@@ -54,7 +54,7 @@ const StudentChart = ({ data }) => {
 
   return (
     <div className="flex justify-center mt-8">
-      <div className="w-full sm:w-[370px] md:w-[450px] bg-white p-6 rounded-lg shadow-md"> 
+      <div className="w-full max-w-[400px] bg-white p-4 rounded-lg shadow-md"> 
         <h2 className="text-center text-xl font-bold mb-4">Gender Distribution</h2>
         {chartData ? (
           <Pie data={chartData} options={options} />

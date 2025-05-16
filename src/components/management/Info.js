@@ -10,23 +10,22 @@ const Info = ({
   setIsFormVisible,
   setFormData,
   setItemId,
-  data
+  data,
 }) => {
-
   const strConverter = (str) => {
     if (!str) return "";
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
-  function handleEditData(id){
+  function handleEditData(id) {
     setItemId(id);
     setIsFormVisible(true);
     setEditMode(true);
 
-    const itemToEdit = data.find((item)=> item._id === id);
+    const itemToEdit = data.find((item) => item._id === id);
 
-    if(itemToEdit){
-       setFormData(itemToEdit);
+    if (itemToEdit) {
+      setFormData(itemToEdit);
     } else {
       toast.error("Item not found");
     }
@@ -35,7 +34,7 @@ const Info = ({
   return (
     <>
       {filteredItem?.map((item) => (
-        <div key={item.id} className="h-[100%] overflow-y-auto scrollbar">
+        <div key={item.id} className="lg:h-[100%] overflow-y-auto scrollbar">
           <div className="flex items-center gap-5 bg-gradient-to-r from-blue-500 to-indigo-600 p-4 rounded-t-xl text-white">
             <div className="flex flex-col">
               <div className="text-2xl font-bold">
@@ -54,14 +53,13 @@ const Info = ({
               </div>
             </div>
           </div>
-          {console.log("student id...", item._id)}
-          <div className="basic-details p-6 bg-gray-50 rounded-b-xl sm:p-4 md:p-5 lg:p-6">
+          <div className="basic-details p-4 md:p-6 bg-gray-50 rounded-b-xl">
             <h3 className="text-lg flex justify-between items-center font-semibold text-gray-700 mb-2 border-b border-gray-300 pb-2">
               Basic Details
               <div className="flex gap-4 items-center">
                 <FaRegEdit
                   className="text-4xl text-blue-400 hover:bg-gray-200 hover:text-blue-600 p-2 rounded-xl transition-all duration-300 ease-in-out shadow-lg hover:scale-110"
-                  onClick={()=>handleEditData(item._id)}
+                  onClick={() => handleEditData(item._id)}
                 />
                 <MdDeleteOutline
                   className="text-4xl text-red-600 hover:bg-gray-200 hover:text-red-800 p-2 rounded-xl transition-all duration-300 ease-in-out shadow-lg hover:scale-110"
@@ -111,7 +109,7 @@ const Info = ({
             </div>
           </div>
 
-          <div className="progress-section mt-4 p-6 bg-gray-50 rounded-xl sm:p-3 md:p-5 lg:p-6">
+          <div className="progress-section mt-4 bg-gray-50 rounded-xl p-3 md:p-5 lg:p-6 hidden md:block">
             <h3 className="text-lg font-semibold text-gray-700 mb-4">
               Progress
             </h3>

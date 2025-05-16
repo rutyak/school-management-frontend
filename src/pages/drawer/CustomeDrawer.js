@@ -66,7 +66,7 @@ const CustomeDrawer = ({
         ) : (
           <div
             ref={btnRef}
-            className={`${baseStyle} w-[198px] ${
+            className={`${baseStyle} w-full ${
               active === "Settings" ? activeStyle : ""
             }`}
             onClick={() => {

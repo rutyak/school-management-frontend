@@ -5,14 +5,9 @@ const Table = ({
   type,
   setFormData,
   formData,
-  headers,
   data,
-  handleDelete,
   handleEditSubmit,
-  setItemId,
-  setIsFormVisible,
   isFormVisible,
-  setEditMode,
   handleItemClick,
 }) => {
   const tableCellClass =
@@ -76,55 +71,54 @@ const Table = ({
             {data && data.length > 0 ? (
               data.map((item) => (
                 <>
-                {type==="Class" && console.log("iteeeem id i want...",item._id)}
-                <tr
-                  key={item._id}
-                  className={`border-b border-gray-200 cursor-pointer`}
-                  onClick={ () =>
-                          handleItemClick(
-                            item._id,
-                            item.className,
-                            item.teacher
-                          )
-                  }
-                >
-                  {type === "Class" ? (
-                    <>
-                      <td className={tableCellClass}>
-                        {strConverter(item.className)}
-                      </td>
-                      <td className={tableCellClass}>
-                        {strConverter(item.teacher)}
-                      </td>
-                      <td className={tableCellClass}>{item.classlimit}</td>
-                      <td className={tableCellClass}>{item.year}</td>
-                    </>
-                  ) : (
-                    <>
-                      {/* <td className={tableCellClass}>
+                  {type === "Class" &&
+                    console.log("iteeeem id i want...", item._id)}
+                  <tr
+                    key={item._id}
+                    className={`border-b border-gray-200 ${ type === 'StudentList'? "cursor-default": "cursor-pointer"}`}
+                    onClick={() => {
+                      if (type !== "StudentList") {
+                        handleItemClick(item._id, item.className, item.teacher);
+                      }
+                    }}
+                  >
+                    {type === "Class" ? (
+                      <>
+                        <td className={tableCellClass}>
+                          {strConverter(item.className)}
+                        </td>
+                        <td className={tableCellClass}>
+                          {strConverter(item.teacher)}
+                        </td>
+                        <td className={tableCellClass}>{item.classlimit}</td>
+                        <td className={tableCellClass}>{item.year}</td>
+                      </>
+                    ) : (
+                      <>
+                        {/* <td className={tableCellClass}>
                         <img
                           src={item.photo}
                           alt={item.name}
                           className="w-10 h-10 rounded-full"
                         />
                       </td> */}
-                      <td className={tableCellClass}>
-                        {strConverter(item.name)}
-                      </td>
-                      <td className={tableCellClass}>{item.id}</td>
-                      <td className={tableCellClass}>
-                        {type === "Analytics"
-                          ? item.salary
-                          : strConverter(item.gender)}
-                      </td>
-                      <td className={tableCellClass}>
-                        {type === "Student" || type === "StudentList"
-                          ? strConverter(item.className)
-                          : strConverter(item.assignedClass)}
-                      </td>
-                    </>
-                  )}
-                </tr>
+                        <td className={tableCellClass}>
+                          {strConverter(item.name)}
+                        </td>
+                        <td className={tableCellClass}>{item.id}</td>
+                        <td className={tableCellClass}>
+                          {type === "Analytics"
+                            ? item.salary
+                            : strConverter(item.gender)}
+                        </td>
+                        <td className={tableCellClass}>
+                          {type === "Student" || type === "StudentList"
+                            ? strConverter(item.className)
+                            : strConverter(item.assignedClass)}
+                        </td>
+                      </>
+                    )}
+                  </tr>
                 </>
               ))
             ) : (

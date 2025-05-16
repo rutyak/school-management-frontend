@@ -19,15 +19,15 @@ const Management = ({
   headers,
   handleDelete,
   setItemId,
-  handleSubmit
+  handleSubmit,
 }) => {
   const isAnalytics = type === "Analytics";
 
   return (
-    <div className="w-full p-4 space-y-6 lg:w-full">
+    <div className="w-full p-3 md:p-4 space-y-6 lg:w-full">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h1 className="text-2xl font-bold text-gray-700">
+      <div className="flex flex-row justify-between items-center gap-4">
+        <h1 className="text-xl md:text-2xl font-bold text-gray-700">
           {isAnalytics ? "Analytics" : `${type} List`}
         </h1>
 

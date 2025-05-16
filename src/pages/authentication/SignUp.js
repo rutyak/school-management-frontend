@@ -81,14 +81,14 @@ const SignUp = () => {
         <InputPassword
           name="password"
           type="password"
-          placeholder="Enter password"
+          placeholder="Enter Password"
           state={password}
           setPassword={setPassword}
         />
         <InputPassword
           name="confirmPassword"
           type="password"
-          placeholder="New Confirm Password"
+          placeholder="Confirm Password"
           state={confirmPassword}
           setPassword={setConfirmPassword}
         />

@@ -209,7 +209,7 @@ const ManagementComponent = ({
     switch (type) {
       case "Analytics":
         return (
-          <div className="p-4 h-full flex flex-col items-center mt-3 sm:p-3 md:p-4 lg:h-full">
+          <div className="p-4 flex flex-col items-center justify-center mt-10">
             <AnalyticsChart
               teacherData={teacherData}
               totalIncome={totalIncome}
@@ -251,8 +251,8 @@ const ManagementComponent = ({
   };
 
   return (
-    <div className="w-full h-full flex gap-5 items-center justify-center flex-col lg:flex-row lg:gap-3 lg:w-full xl:gap-5 p-2 xl:p-0 xl:py-5">
-      <div className="w-full lg:w-[40%] lg:h-full student-list p-1 border rounded-xl bg-white ">
+    <div className="w-full h-full flex gap-5 items-center justify-center flex-col xl:flex-row lg:gap-3 lg:w-full xl:gap-5 p-2 xl:p-0 xl:py-5">
+      <div className="w-full xl:w-[40%] xl:h-full student-list border rounded-xl bg-white ">
         <Management
           type={type}
           salaryView={salaryView}
@@ -273,7 +273,7 @@ const ManagementComponent = ({
           handleSubmit={editMode ? handleEditSubmit : handleSubmit}
         />
       </div>
-      <div className="w-full lg:flex-1 border rounded-xl bg-white shadow-md p-2 lg:h-full lg:overflow-y-auto">
+      <div className="w-full xl:flex-1 border rounded-xl bg-white shadow-md p-2 xl:h-full lg:overflow-y-auto">
         {renderContent()}
       </div>
     </div>

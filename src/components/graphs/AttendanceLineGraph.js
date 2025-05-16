@@ -86,7 +86,7 @@ const AttendanceLineGraph = ({ type, name, percentage }) => {
   };
 
   return (
-    <div className="w-full h-96 lg:h-96 lg:w-full">
+    <div className="w-full h-80 lg:h-96 flex items-center justify-center">
       <Line data={data} options={options} />
     </div>
   );

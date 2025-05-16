@@ -55,7 +55,7 @@ const AnalyticsChart = ({ teacherData, totalIncome }) => {
   }
 
   return (
-      <div className="w-full !h-[520px] bg-white p-6 rounded-lg shadow-md mt-14 lg:p-6 lg:w-full lg:h-[520px]">
+      <div className="w-full max-h-[420px] p-6">
         <h2 className="text-center text-xl font-bold mb-4 lg:text-xl">Total Salary Expenses vs Total Income</h2>
         {chartData ? (
           <Bar data={chartData} options={options} />
