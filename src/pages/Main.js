@@ -16,7 +16,7 @@ const Main = () => {
   return (
     <div className="w-screen h-screen overflow-auto bg-gradient-to-r from-blue-500 to-purple-200 flex flex-col xl:flex-row 2xl:max-w-[]">
       <div
-        className={`h-full flex-shrink-0 w-[80px] md:max-w-[90px] xl:w-[15%] ${
+        className={`h-full flex-shrink-0 max-w-[17%] ${
           openMenu ? "z-10 absolute block" : "hidden"
         } xl:block`}
       >

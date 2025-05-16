@@ -13,7 +13,7 @@ const Sidebar = ({ openMenu, setOpenMenu }) => {
   const { onOpen } = useDisclosure();
 
   const baseStyle =
-    "flex items-center gap-3 text-white text-lg xl:text-xl font-medium px-3 py-2 md:py-3 md:px-4 rounded-lg transition-all duration-300 ease-in-out hover:bg-white/10 hover:translate-x-2";
+    "flex items-center gap-3 text-white text-lg xl:text-xl font-medium py-1 px-2 md:py-3 md:px-4 rounded-lg transition-all duration-300 ease-in-out hover:bg-white/10 hover:translate-x-2";
 
   const activeStyle = "bg-blue-700 text-blue-600 shadow-md";
   const iconStyle = "w-6 h-6 xl:w-7 xl:h-7";
@@ -26,7 +26,7 @@ const Sidebar = ({ openMenu, setOpenMenu }) => {
   };
 
   return (
-    <div className="h-screen bg-gradient-to-b from-blue-900 to-blue-700 p-4 shadow-lg relative">
+    <div className="h-screen bg-gradient-to-b from-blue-900 to-blue-700 p-3 md:p-4 shadow-lg relative">
       {/* Logo */}
       <div className="flex items-center justify-center pb-10">
         <div className="flex items-center gap-3">
