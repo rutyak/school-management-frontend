@@ -18,9 +18,9 @@ const Welcome = () => {
           </div>
           <Outlet />
         </div>
-        <div className="w-[45%] h-full max-h-[580px] flex justify-center items-center animate-fadeIn hidden xl:block lg:w-[45%]">
+        <div className="w-[45%] h-full flex justify-center items-center hidden xl:block lg:w-[45%]">
           <img
-            className="h-full shadow-2xl rounded-lg transition-transform duration-500 ease-in-out transform hover:scale-105 object-cover"
+            className="h-full shadow-2xl rounded-lg object-cover"
             src={schoolbanner}
             alt="school-banner-image"
           />

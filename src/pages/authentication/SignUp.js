@@ -46,7 +46,7 @@ const SignUp = () => {
   // }
 
   return (
-    <div className="w-[100%] flex flex-col p-3 mb-4 animate-sideInLeft mt-20 md:mt-28 xl:mt-5">
+    <div className="w-[100%] flex flex-col p-3 mb-4 animate-sideInLeft mt-20 md:mt-5">
       <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold text-gray-800 mb-2">Sign Up</h1>
       <h3 className="text-sm md:text-md text-gray-600 mb-6">
         Create your account to keep up with school news!

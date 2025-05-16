@@ -13,7 +13,7 @@ const Sidebar = ({ openMenu, setOpenMenu }) => {
   const { onOpen } = useDisclosure();
 
   const baseStyle =
-    "flex items-center gap-3 text-white text-lg xl:text-xl font-medium py-1 px-2 md:py-3 md:px-4 rounded-lg transition-all duration-300 ease-in-out hover:bg-white/10 hover:translate-x-2";
+    "flex items-center justify-center xl:justify-start gap-3 text-white text-lg xl:text-xl font-medium py-1 px-2 md:py-3 md:px-4 rounded-lg transition-all duration-300 ease-in-out hover:bg-white/10 hover:translate-x-2";
 
   const activeStyle = "bg-blue-700 text-blue-600 shadow-md";
   const iconStyle = "w-6 h-6 xl:w-7 xl:h-7";

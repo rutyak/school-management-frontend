@@ -53,7 +53,7 @@ const Login = () => {
   }
 
   return (
-    <div className="w-[100%] flex flex-col p-3 mb-4 animate-sideInLeft mt-24 md:mt-32 xl:mt-20">
+    <div className="w-[100%] flex flex-col p-3 mb-4 animate-sideInLeft mt-24 md:mt-10 xl:mt-20">
       <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold text-gray-800 mb-2">
         Welcome Back!
       </h1>
