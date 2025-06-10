@@ -30,7 +30,7 @@ const Main = () => {
           hideInput={hideInput}
           linkType={linkType}
         />
-        <div className="xl:h-[90%] flex-1">
+        <div className="xl:h-[595px] flex-1">
           <Outlet context={{ search, setSearch, setHideInput, setLinkType }} />
         </div>
       </div>
