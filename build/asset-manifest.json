@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.894f62a5.css",
-    "main.js": "/static/js/main.72e32d66.js",
+    "main.css": "/static/css/main.0fb3bdce.css",
+    "main.js": "/static/js/main.dfefd97e.js",
     "static/media/school-banner.jpg": "/static/media/school-banner.cc2a14bacdb71787177a.jpg",
     "index.html": "/index.html",
-    "main.894f62a5.css.map": "/static/css/main.894f62a5.css.map",
-    "main.72e32d66.js.map": "/static/js/main.72e32d66.js.map"
+    "main.0fb3bdce.css.map": "/static/css/main.0fb3bdce.css.map",
+    "main.dfefd97e.js.map": "/static/js/main.dfefd97e.js.map"
   },
   "entrypoints": [
-    "static/css/main.894f62a5.css",
-    "static/js/main.72e32d66.js"
+    "static/css/main.0fb3bdce.css",
+    "static/js/main.dfefd97e.js"
   ]
 }
